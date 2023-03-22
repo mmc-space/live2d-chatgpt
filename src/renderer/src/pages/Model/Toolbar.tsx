@@ -11,7 +11,7 @@ interface ToolbarProps {
   onLockClick: () => void
 }
 
-const Container = styled.div`
+const Container = styled.div<{ show?: boolean }>`
   display: flex;
   flex-direction: column;
   height: 50px;
@@ -23,6 +23,8 @@ const Container = styled.div`
   bottom: 20px;
   transform: translateX(-50%);
   position: absolute;
+
+  ${(props) => `opacity: ${!props.show ? 1 : 0}`}
 `
 
 const Wrapper = styled.div`
@@ -72,7 +74,7 @@ const Toolbar: FC<ToolbarProps> = ({ show, onShowMessage, onLockClick }) => {
   ]
 
   return (
-    <Container>
+    <Container show={show}>
       <Wrapper>
         {toolList.map((item) => {
           const { name, icon, call } = item
@@ -86,7 +88,7 @@ const Toolbar: FC<ToolbarProps> = ({ show, onShowMessage, onLockClick }) => {
         })}
       </Wrapper>
 
-      <InputWapper onShowMessage={onShowMessage} />
+      {/* <InputWapper onShowMessage={onShowMessage} /> */}
     </Container>
   )
 }
